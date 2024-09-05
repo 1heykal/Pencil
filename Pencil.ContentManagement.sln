@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EC8027C3-9AC6-446A-AA43-7BFDB85CC0A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AECD063F-386A-4B14-8169-34DD36365EAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D0E273D4-28A7-494C-82EE-822542110A0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Domain", "Pencil.ContentManagement.Domain\Pencil.ContentManagement.Domain.csproj", "{BA1CEF46-7775-4CFD-9532-52F71C9923B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Application", "Pencil.ContentManagement.Application\Pencil.ContentManagement.Application.csproj", "{BDEB3E6A-497B-456E-A119-9A9338D6BF14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9C76FE3B-66B1-43AB-8306-42D71598C19B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Persistencce", "Pencil.ContentManagement.Persistencce\Pencil.ContentManagement.Persistencce.csproj", "{8CF46610-494D-4995-B29A-FF7EE68D6F4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Infrastructure", "Pencil.ContentManagement.Infrastructure\Pencil.ContentManagement.Infrastructure.csproj", "{548C5B96-4A11-4EBC-98C9-2AD12CFEDF93}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{463FACFA-8B90-4691-91F7-08770F326343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.API", "Pencil.ContentManagement.API\Pencil.ContentManagement.API.csproj", "{8B47F257-6570-4B21-867D-FAA4BB5E4A0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0E273D4-28A7-494C-82EE-822542110A0F} = {EC8027C3-9AC6-446A-AA43-7BFDB85CC0A9}
+		{BA1CEF46-7775-4CFD-9532-52F71C9923B3} = {D0E273D4-28A7-494C-82EE-822542110A0F}
+		{BDEB3E6A-497B-456E-A119-9A9338D6BF14} = {D0E273D4-28A7-494C-82EE-822542110A0F}
+		{9C76FE3B-66B1-43AB-8306-42D71598C19B} = {EC8027C3-9AC6-446A-AA43-7BFDB85CC0A9}
+		{8CF46610-494D-4995-B29A-FF7EE68D6F4A} = {9C76FE3B-66B1-43AB-8306-42D71598C19B}
+		{548C5B96-4A11-4EBC-98C9-2AD12CFEDF93} = {9C76FE3B-66B1-43AB-8306-42D71598C19B}
+		{463FACFA-8B90-4691-91F7-08770F326343} = {EC8027C3-9AC6-446A-AA43-7BFDB85CC0A9}
+		{8B47F257-6570-4B21-867D-FAA4BB5E4A0B} = {463FACFA-8B90-4691-91F7-08770F326343}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA1CEF46-7775-4CFD-9532-52F71C9923B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1CEF46-7775-4CFD-9532-52F71C9923B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1CEF46-7775-4CFD-9532-52F71C9923B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1CEF46-7775-4CFD-9532-52F71C9923B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDEB3E6A-497B-456E-A119-9A9338D6BF14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDEB3E6A-497B-456E-A119-9A9338D6BF14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDEB3E6A-497B-456E-A119-9A9338D6BF14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDEB3E6A-497B-456E-A119-9A9338D6BF14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF46610-494D-4995-B29A-FF7EE68D6F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF46610-494D-4995-B29A-FF7EE68D6F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF46610-494D-4995-B29A-FF7EE68D6F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF46610-494D-4995-B29A-FF7EE68D6F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{548C5B96-4A11-4EBC-98C9-2AD12CFEDF93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{548C5B96-4A11-4EBC-98C9-2AD12CFEDF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{548C5B96-4A11-4EBC-98C9-2AD12CFEDF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{548C5B96-4A11-4EBC-98C9-2AD12CFEDF93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B47F257-6570-4B21-867D-FAA4BB5E4A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B47F257-6570-4B21-867D-FAA4BB5E4A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B47F257-6570-4B21-867D-FAA4BB5E4A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B47F257-6570-4B21-867D-FAA4BB5E4A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
