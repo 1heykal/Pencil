@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9C76FE3B-66B1-43AB-8306-42D71598C19B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Persistencce", "Pencil.ContentManagement.Persistencce\Pencil.ContentManagement.Persistencce.csproj", "{8CF46610-494D-4995-B29A-FF7EE68D6F4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Persistence", "Pencil.ContentManagement.Persistence\Pencil.ContentManagement.Persistence.csproj", "{8CF46610-494D-4995-B29A-FF7EE68D6F4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pencil.ContentManagement.Infrastructure", "Pencil.ContentManagement.Infrastructure\Pencil.ContentManagement.Infrastructure.csproj", "{548C5B96-4A11-4EBC-98C9-2AD12CFEDF93}"
 EndProject

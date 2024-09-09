@@ -6,4 +6,25 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.4.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.7.3" />
+      <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.7.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Pencil.ContentManagement.Application\Pencil.ContentManagement.Application.csproj" />
+      <ProjectReference Include="..\Pencil.ContentManagement.Infrastructure\Pencil.ContentManagement.Infrastructure.csproj" />
+      <ProjectReference Include="..\Pencil.ContentManagement.Persistence\Pencil.ContentManagement.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Contollers\" />
+    </ItemGroup>
+
 </Project>
