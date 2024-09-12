@@ -10,7 +10,8 @@ public class ApplicationUser
     
     public string Email { get; set; }
     public string Username { get; set; }
-    private string PasswordHash { get; set; }
+    public string PasswordHash { get; set; }
+    
     public string? PhoneNumber { get; set; }
     
     
@@ -22,6 +23,7 @@ public class ApplicationUser
     public string? Gender { get; set; }
 
     public bool Deactivated { get; set; }
+    
     public bool SoftDeleted { get; set; }
 
     public IReadOnlyCollection<Following> Followers { get; }
