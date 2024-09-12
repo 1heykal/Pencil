@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Pencil.ContentManagement.Application\Pencil.ContentManagement.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MailKit" Version="4.7.1.1" />
+      <PackageReference Include="MimeKit" Version="4.7.1" />
+    </ItemGroup>
+
 </Project>
