@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pencil.ContentManagement.API.Filters;
 using Pencil.ContentManagement.Application.Features.Posts.Commands.CreatePost;
@@ -27,7 +28,7 @@ namespace Pencil.ContentManagement.API.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpPost][GetUserId]
+        [HttpPost][Authorize]
         public async Task<ActionResult<BaseResponse<CreatePostDto>>> AddPost(CreatePostCommand command)
         {
             var response = await _mediator.Send(command);
@@ -55,7 +56,7 @@ namespace Pencil.ContentManagement.API.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpDelete("{id}")][GetUserId]
+        [HttpDelete("{id}")][Authorize]
         public async Task<ActionResult<BaseResponse<string>>> DeletePost(Guid id)
         {
             var response = await _mediator.Send(new DeletePostCommand { Id = id });
@@ -63,7 +64,7 @@ namespace Pencil.ContentManagement.API.Controllers
                 response.StatusCode is StatusCodes.Status204NoContent ? null : response);
         }
         
-        [HttpPut][GetUserId]
+        [HttpPut][Authorize]
         public async Task<ActionResult<BaseResponse<string>>> UpdatePost(UpdatePostCommand command)
         {
             var response = await _mediator.Send(command);

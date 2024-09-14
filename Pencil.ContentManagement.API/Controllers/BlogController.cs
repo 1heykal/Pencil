@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pencil.ContentManagement.API.Filters;
 using Pencil.ContentManagement.Application.Features.Blogs.Commands.CreateBlog;
@@ -19,7 +20,7 @@ public class BlogController : ControllerBase
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
-    [HttpPost][GetUserId]
+    [HttpPost][Authorize]
     public async Task<ActionResult<BaseResponse<CreatedBlogDto>>> CreateBlog(CreateBlogCommand command)
     {
         var response = await _mediator.Send(command);
@@ -33,7 +34,7 @@ public class BlogController : ControllerBase
         return StatusCode(response.StatusCode, response);
     }
     
-    [HttpDelete("{id}")][GetUserId]
+    [HttpDelete("{id}")][Authorize]
     public async Task<ActionResult<BaseResponse<string>>> DeleteBlog(Guid id)
     {
         var response = await _mediator.Send(new DeleteBlogCommand{ Id = id });
