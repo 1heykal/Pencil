@@ -84,4 +84,4 @@ app.ConfigureStaticFiles();
 
 app.MapGet("/helloworld", () => "Hello World!");
 
-app.Run();
+await app.RunAsync();
