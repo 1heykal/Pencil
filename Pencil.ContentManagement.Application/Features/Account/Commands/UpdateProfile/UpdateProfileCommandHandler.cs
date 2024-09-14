@@ -22,19 +22,13 @@ public class UpdateProfileCommandHandler : IRequestHandler<UpdateProfileCommand,
 
     public async Task<BaseResponse<string>> Handle(UpdateProfileCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<string>();
         var result = AuthHelper.GetUserId(_httpContextAccessor);
-        if (!result.Success)
-        {
-            response.ValidationErrors = ["Can't Find the user"];
-            response.StatusCode = StatusCodes.Status400BadRequest;
-            return response;
-        }
-
+        
         var user = await _userRepository.GetByIdAsync(result.UserId, cancellationToken);
+        
         _mapper.Map(request, user);
         await _userRepository.SaveChangesAsync(cancellationToken);
-        response.StatusCode = StatusCodes.Status204NoContent;
-        return response;
+        
+        return new ("Profile updated successfully!",StatusCodes.Status204NoContent);
     }
 }

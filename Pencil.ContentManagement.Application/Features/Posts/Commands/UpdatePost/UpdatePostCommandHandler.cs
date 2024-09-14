@@ -25,45 +25,18 @@ public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, BaseR
 
     public async Task<BaseResponse<string>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
     {
-
         var entity = await _postRepository.GetByIdAsync(request.Id, cancellationToken);
         
         if (entity is null)
-        {
-            return new BaseResponse<string>
-            {
-                ValidationErrors = ["Can't Find the post."],
-                StatusCode = StatusCodes.Status404NotFound,
-                Success = false
-            };
-        }
+            return new (["Can't Find the post."], StatusCodes.Status404NotFound);
         
-        var result = AuthHelper.GetUserId(_httpContextAccessor);
-
-        if (!result.Success)
-        {
-            return new BaseResponse<string>
-            {
-                ValidationErrors = ["Can't Find the user"],
-                StatusCode = StatusCodes.Status403Forbidden,
-                Success = false
-            };
-        }
-
-        if (!result.UserId.Equals(entity.AuthorId))
-        {
-            return new BaseResponse<string>
-            {
-                ValidationErrors = ["You don't have the authorization update this post."],
-                StatusCode = StatusCodes.Status401Unauthorized,
-                Success = false
-            };
-        }
+        if (!AuthHelper.IsUserAuthorized(_httpContextAccessor, entity.AuthorId))
+            return new UnauthorizedResponse<string>();
              
         _mapper.Map(request, entity);
         await _postRepository.SaveChangesAsync(cancellationToken);
 
-        return new (true, "Post Updated Successfully", StatusCodes.Status204NoContent);
+        return new ("Post Updated Successfully", StatusCodes.Status204NoContent);
     }
     
 }
