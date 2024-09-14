@@ -30,6 +30,12 @@ public class BaseResponse<T>
         Success = true;
         Message = message;
     }
+    
+    public BaseResponse(string message, int statusCode)
+    {
+        Message = message;
+        StatusCode = statusCode;
+    }
 
     public BaseResponse(bool success, string message, int statusCode = StatusCodes.Status400BadRequest)
     {
@@ -38,21 +44,21 @@ public class BaseResponse<T>
         StatusCode = statusCode;
     }
     
-    public BaseResponse(bool success, string message, T? data)
+    public BaseResponse(string message, T data, int statusCode = StatusCodes.Status200OK)
     {
-        Success = success;
         Message = message;
         Data = data;
+        StatusCode = statusCode;
     }
 
-    public BaseResponse(List<string>? validationErrors)
+    public BaseResponse(List<string> validationErrors)
     {
         Success = false;
         StatusCode = StatusCodes.Status400BadRequest;
         ValidationErrors = validationErrors;
     }
 
-    public BaseResponse(List<string>? validationErrors, int statusCode = StatusCodes.Status400BadRequest)
+    public BaseResponse(List<string> validationErrors, int statusCode)
     {
         Success = false;
         ValidationErrors = validationErrors;
