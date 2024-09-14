@@ -41,4 +41,8 @@ public static class AuthHelper
         var success = Guid.TryParse(httpContextAccessor.HttpContext.User?.FindFirst("UserId")?.Value, out var result);
         return (success, result);
     }
+
+    public static bool IsUserAuthorized(IHttpContextAccessor httpContextAccessor, Guid userId)
+        => userId.Equals(httpContextAccessor?.HttpContext?.Items["UserId"] ?? GetUserId(httpContextAccessor).UserId);
+
 }
