@@ -27,36 +27,17 @@ public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, BaseR
 
     public async Task<BaseResponse<CreatePostDto>> Handle(CreatePostCommand request, CancellationToken cancellationToken)
     {
-        var result = AuthHelper.GetUserId(_httpContextAccessor);
-
-        if (!result.Success)
-        {
-            return new BaseResponse<CreatePostDto>
-            {
-                StatusCode =  StatusCodes.Status400BadRequest,
-                ValidationErrors = ["Can't Find the user"],
-                Success = false
-            };
-        }
-
         if (request.BlogId.HasValue)
         {
             var blogExists = await _blogRepository.ExistsAsync(request.BlogId.Value);
             if (!blogExists)
-            {
-                return new BaseResponse<CreatePostDto>
-                {
-                    StatusCode = StatusCodes.Status400BadRequest,
-                    ValidationErrors = [$"Incorrect Blog Id: {request.BlogId}"],
-                    Success = false
-                };
-            }
-               
+                return new BaseResponse<CreatePostDto>([$"Incorrect Blog Id: {request.BlogId}"]);
         }
         
         var entity = _mapper.Map<Post>(request);
 
-        entity.AuthorId = result.UserId;
+        entity.AuthorId = AuthHelper.GetUserId(_httpContextAccessor).UserId;
+        
         entity.Url = ((request.Title ?? request.Subtitle ?? string.Empty) + RandomNumberGenerator.GetHexString(10)).Replace(' ', '-');
         var post = await _postRepository.AddAsync(entity, cancellationToken);
         

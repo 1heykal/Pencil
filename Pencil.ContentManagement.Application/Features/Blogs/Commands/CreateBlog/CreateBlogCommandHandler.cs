@@ -27,30 +27,17 @@ public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, BaseR
 
     public async Task<BaseResponse<CreatedBlogDto>> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
     {
-        var result = AuthHelper.GetUserId(_httpContextAccessor);
-
-        if (!result.Success)
-        {
-            return new BaseResponse<CreatedBlogDto>
-            {
-                ValidationErrors = ["Can't Find the user"],
-                StatusCode = StatusCodes.Status400BadRequest,
-                Success = false
-            };
-
-        }
-
         if (request.Username.IsNullOrEmpty())
         {
             request.Username = $"blog{RandomNumberGenerator.GetHexString(10)}";
         }
         
         var entity = _mapper.Map<Blog>(request);
-        entity.AuthorId = result.UserId;
+        entity.AuthorId = AuthHelper.GetUserId(_httpContextAccessor).UserId;
 
         await _blogRepository.AddAsync(entity, cancellationToken);
 
-        return new BaseResponse<CreatedBlogDto>
+        return new BaseResponse<CreatedBlogDto>()
         {
             StatusCode = StatusCodes.Status201Created,
             Data = _mapper.Map<CreatedBlogDto>(entity)
