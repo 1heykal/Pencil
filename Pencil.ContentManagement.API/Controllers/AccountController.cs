@@ -16,8 +16,7 @@ public class AccountController : ControllerBase
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
-    [HttpPut("Profile")]
-    [CheckUserId]
+    [HttpPut("Profile")][GetUserId]
     public async Task<ActionResult> UpdateProfile(UpdateProfileCommand command)
     {
         var response = await _mediator.Send(command);

@@ -27,8 +27,7 @@ namespace Pencil.ContentManagement.API.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpPost]
-        [CheckUserId]
+        [HttpPost][GetUserId]
         public async Task<ActionResult<BaseResponse<CreatePostDto>>> AddPost(CreatePostCommand command)
         {
             var response = await _mediator.Send(command);
@@ -56,7 +55,7 @@ namespace Pencil.ContentManagement.API.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")][GetUserId]
         public async Task<ActionResult<BaseResponse<string>>> DeletePost(Guid id)
         {
             var response = await _mediator.Send(new DeletePostCommand { Id = id });
@@ -64,7 +63,7 @@ namespace Pencil.ContentManagement.API.Controllers
                 response.StatusCode is StatusCodes.Status204NoContent ? null : response);
         }
         
-        [HttpPut]
+        [HttpPut][GetUserId]
         public async Task<ActionResult<BaseResponse<string>>> UpdatePost(UpdatePostCommand command)
         {
             var response = await _mediator.Send(command);
