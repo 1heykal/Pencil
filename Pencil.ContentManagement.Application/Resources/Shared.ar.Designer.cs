@@ -69,11 +69,74 @@ namespace Pencil.ContentManagement.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فشلت العملية..
+        /// </summary>
+        internal static string Failure {
+            get {
+                return ResourceManager.GetString("Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to البريد الإلكتروني أو كلمة المرور غير صحيحة..
         /// </summary>
         internal static string IncorrectEmailOrPassword {
             get {
                 return ResourceManager.GetString("IncorrectEmailOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يجب أن تحتوي كلمة المرور على رقم واحد على الأقل..
+        /// </summary>
+        internal static string PasswordDigit {
+            get {
+                return ResourceManager.GetString("PasswordDigit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل..
+        /// </summary>
+        internal static string PasswordLowercase {
+            get {
+                return ResourceManager.GetString("PasswordLowercase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل..
+        /// </summary>
+        internal static string PasswordMinLength {
+            get {
+                return ResourceManager.GetString("PasswordMinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to كلمة المرور مطلوبة..
+        /// </summary>
+        internal static string PasswordRequired {
+            get {
+                return ResourceManager.GetString("PasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل (@$!%*?&amp;)..
+        /// </summary>
+        internal static string PasswordSpecialChar {
+            get {
+                return ResourceManager.GetString("PasswordSpecialChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل..
+        /// </summary>
+        internal static string PasswordUppercase {
+            get {
+                return ResourceManager.GetString("PasswordUppercase", resourceCulture);
             }
         }
         
@@ -92,6 +155,15 @@ namespace Pencil.ContentManagement.Application.Resources {
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم المستخدم غير متوفر..
+        /// </summary>
+        internal static string UsernameAlreadyTaken {
+            get {
+                return ResourceManager.GetString("UsernameAlreadyTaken", resourceCulture);
             }
         }
         

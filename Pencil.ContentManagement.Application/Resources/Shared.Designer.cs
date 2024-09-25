@@ -69,11 +69,74 @@ namespace Pencil.ContentManagement.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operation failed..
+        /// </summary>
+        internal static string Failure {
+            get {
+                return ResourceManager.GetString("Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect email or password..
         /// </summary>
         internal static string IncorrectEmailOrPassword {
             get {
                 return ResourceManager.GetString("IncorrectEmailOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least one digit..
+        /// </summary>
+        internal static string PasswordDigit {
+            get {
+                return ResourceManager.GetString("PasswordDigit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least one lowercase letter..
+        /// </summary>
+        internal static string PasswordLowercase {
+            get {
+                return ResourceManager.GetString("PasswordLowercase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must be at least 8 characters long..
+        /// </summary>
+        internal static string PasswordMinLength {
+            get {
+                return ResourceManager.GetString("PasswordMinLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required..
+        /// </summary>
+        internal static string PasswordRequired {
+            get {
+                return ResourceManager.GetString("PasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least one special character (@$!%*?&amp;)..
+        /// </summary>
+        internal static string PasswordSpecialChar {
+            get {
+                return ResourceManager.GetString("PasswordSpecialChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password must contain at least one uppercase letter..
+        /// </summary>
+        internal static string PasswordUppercase {
+            get {
+                return ResourceManager.GetString("PasswordUppercase", resourceCulture);
             }
         }
         
@@ -92,6 +155,15 @@ namespace Pencil.ContentManagement.Application.Resources {
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is already taken..
+        /// </summary>
+        internal static string UsernameAlreadyTaken {
+            get {
+                return ResourceManager.GetString("UsernameAlreadyTaken", resourceCulture);
             }
         }
         

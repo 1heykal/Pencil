@@ -33,4 +33,28 @@
     <data name="Success" xml:space="preserve">
         <value>Operation completed successfully!</value>
     </data>
+    <data name="Failure" xml:space="preserve">
+        <value>Operation failed.</value>
+    </data>
+    <data name="UsernameAlreadyTaken" xml:space="preserve">
+        <value>Username is already taken.</value>
+    </data>
+    <data name="PasswordRequired" xml:space="preserve">
+        <value>Password is required.</value>
+    </data>
+    <data name="PasswordMinLength" xml:space="preserve">
+        <value>Password must be at least 8 characters long.</value>
+    </data>
+    <data name="PasswordLowercase" xml:space="preserve">
+        <value>Password must contain at least one lowercase letter.</value>
+    </data>
+    <data name="PasswordUppercase" xml:space="preserve">
+        <value>Password must contain at least one uppercase letter.</value>
+    </data>
+    <data name="PasswordDigit" xml:space="preserve">
+        <value>Password must contain at least one digit.</value>
+    </data>
+    <data name="PasswordSpecialChar" xml:space="preserve">
+        <value>Password must contain at least one special character (@$!%*?&amp;).</value>
+    </data>
 </root>
