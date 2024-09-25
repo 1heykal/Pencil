@@ -16,5 +16,9 @@ public class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
             .WithMany(b => b.Subscriptions)
             .HasForeignKey(s => s.BlogId)
             .OnDelete(DeleteBehavior.Restrict);
+
+
+        builder
+            .HasQueryFilter(s => s.Active);
     }
 }

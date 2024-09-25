@@ -132,6 +132,9 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                     b.Property<Guid>("PostId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("PublishedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("SoftDeleted")
                         .HasColumnType("bit");
 
@@ -159,11 +162,15 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                     b.Property<Guid>("FollowerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("SoftDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("FollowedId");
-
                     b.HasIndex("FollowerId");
+
+                    b.HasIndex("FollowedId", "FollowerId")
+                        .IsUnique();
 
                     b.ToTable("Following");
                 });

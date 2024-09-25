@@ -1,4 +1,5 @@
 using FluentValidation;
+using Pencil.ContentManagement.Application.Resources;
 
 namespace Pencil.ContentManagement.Application.Features.Auth.Commands.RegisterUser;
 
@@ -10,13 +11,17 @@ public class RegisterUserCommandValidator : AbstractValidator<RegisterUserComman
             .NotEmpty();
 
         RuleFor(c => c.Email)
-            .NotEmpty().WithMessage("{PropertyName} can't be Empty")
+            .NotEmpty().WithMessage("Email can't be Empty")
             .EmailAddress().WithMessage("Invalid Email Address.");
-        
-        RuleFor(c => c.Password)
-            .NotEmpty().WithMessage("{PropertyName} can't be Empty")
-            .MinimumLength(8).WithMessage("{PropertyName} must be at least 8 characters long.");
 
+        RuleFor(c => c.Password)
+            .NotEmpty().WithMessage(Shared.PasswordRequired)
+            .MinimumLength(8).WithMessage(Shared.PasswordMinLength)
+            .Matches("[a-z]").WithMessage(Shared.PasswordLowercase)
+            .Matches("[A-Z]").WithMessage(Shared.PasswordUppercase)
+            .Matches(@"\d").WithMessage(Shared.PasswordDigit)
+            .Matches(@"[@$!%*?&]").WithMessage(Shared.PasswordSpecialChar);
+        
         RuleFor(c => c.ConfirmPassword)
             .Matches(c => c.Password).WithMessage("Passwords don't match.");
         

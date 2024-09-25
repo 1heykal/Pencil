@@ -1,10 +1,9 @@
-using System.Security.Cryptography;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Pencil.ContentManagement.Application.Contracts.Persistence;
 using Pencil.ContentManagement.Application.Features.Auth;
-using Pencil.ContentManagement.Application.Features.Posts.Commands.CreatePost;
+using Pencil.ContentManagement.Application.Resources;
 using Pencil.ContentManagement.Application.Responses;
 using Pencil.ContentManagement.Domain.Entities;
 
@@ -28,7 +27,7 @@ public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, BaseR
         var entity = await _postRepository.GetByIdAsync(request.Id, cancellationToken);
         
         if (entity is null)
-            return new (["Can't Find the post."], StatusCodes.Status404NotFound);
+            return new ("Can't find the post.", StatusCodes.Status404NotFound);
         
         if (!AuthHelper.IsUserAuthorized(_httpContextAccessor, entity.AuthorId))
             return new UnauthorizedResponse<string>();
@@ -36,7 +35,7 @@ public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, BaseR
         _mapper.Map(request, entity);
         await _postRepository.SaveChangesAsync(cancellationToken);
 
-        return new ("Post Updated Successfully", StatusCodes.Status204NoContent);
+        return new (Shared.Success, StatusCodes.Status204NoContent);
     }
     
 }

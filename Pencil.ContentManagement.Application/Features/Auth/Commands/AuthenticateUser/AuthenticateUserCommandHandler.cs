@@ -1,11 +1,9 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using Pencil.ContentManagement.Application.Contracts.Persistence;
+using Pencil.ContentManagement.Application.Resources;
 using Pencil.ContentManagement.Application.Responses;
-using Pencil.ContentManagement.Domain.Entities;
 
 namespace Pencil.ContentManagement.Application.Features.Auth.Commands.AuthenticateUser;
 
@@ -22,19 +20,12 @@ public class AuthenticateUserCommandHandler: IRequestHandler<AuthenticateUserCom
 
     public async Task<BaseResponse<string>> Handle(AuthenticateUserCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<string>();
-        
         var user = await _userRepository.GetUserByEmailAsync(request.Email, cancellationToken);
 
         if (user is null || !user.ValidatePassword(request.Password))
-        {
-            response.ValidationErrors = ["Incorrect Email or Password."];
-            response.Success = false;
-            return response;
-        }
+            return new(Shared.IncorrectEmailOrPassword, StatusCodes.Status403Forbidden);
         
-        response.Data = AuthHelper.GenerateJwtToken(user.Id, _configuration);
-        return response;
+        return new (Shared.Success, AuthHelper.GenerateJwtToken(user.Id, _configuration));
     }
     
    

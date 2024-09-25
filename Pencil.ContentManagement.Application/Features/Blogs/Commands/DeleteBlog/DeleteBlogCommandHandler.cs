@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Pencil.ContentManagement.Application.Contracts.Persistence;
 using Pencil.ContentManagement.Application.Features.Auth;
+using Pencil.ContentManagement.Application.Resources;
 using Pencil.ContentManagement.Application.Responses;
 
 namespace Pencil.ContentManagement.Application.Features.Blogs.Commands.DeleteBlog;
@@ -30,6 +31,6 @@ public class DeleteBlogCommandHandler : IRequestHandler<DeleteBlogCommand, BaseR
 
         await _blogRepository.SoftDelete(blog, cancellationToken);
 
-        return new BaseResponse<string>(true, "Blog Deleted Successfully.", StatusCodes.Status204NoContent);
+        return new BaseResponse<string>(Shared.Success, StatusCodes.Status204NoContent);
     }
 }

@@ -13,6 +13,8 @@ public interface IAsyncRepository<T> where T : class
 
      Task<T?> GetAsync(Expression<Func<T, bool>> wherePredicate, CancellationToken cancellationToken = default);
      
+     Task<bool> ExistsAsync(Expression<Func<T, bool>> wherePredicate, CancellationToken cancellationToken = default);
+     
      Task<T> AddAsync(T entity, CancellationToken cancellationToken = default);
 
      Task DeleteAsync(T entity, CancellationToken cancellationToken = default);

@@ -14,4 +14,7 @@ public class PostsDto
     
     public string AuthorName { get; set; } = string.Empty;
     public string AuthorPhotoPath { get; set; } = string.Empty;
+    
+    public int LikesCount { get; set; }
+    public int CommentsCount { get; set; }
 }

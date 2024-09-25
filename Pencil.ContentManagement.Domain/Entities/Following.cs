@@ -10,5 +10,7 @@ public class Following
     public Guid FollowedId { get; set; }
     public ApplicationUser Followed { get; set; }
 
+    public bool SoftDeleted { get; set; }
+
     public DateTime FirstFollowedOn { get; set; } = DateTime.UtcNow;
 }

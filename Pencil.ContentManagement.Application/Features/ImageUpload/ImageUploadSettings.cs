@@ -1,4 +1,4 @@
-namespace Pencil.ContentManagement.API.Middlewares;
+namespace Pencil.ContentManagement.Application.Features.ImageUpload;
 
 public class ImageUploadSettings
 {

@@ -1,10 +1,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pencil.ContentManagement.API.Filters;
 using Pencil.ContentManagement.Application.Features.Blogs.Commands.CreateBlog;
 using Pencil.ContentManagement.Application.Features.Blogs.Commands.DeleteBlog;
+using Pencil.ContentManagement.Application.Features.Blogs.Commands.UpdateBlog;
 using Pencil.ContentManagement.Application.Features.Blogs.Queries.GetBlog;
+using Pencil.ContentManagement.Application.Features.Blogs.Queries.GetBlogPosts;
 using Pencil.ContentManagement.Application.Responses;
 
 namespace Pencil.ContentManagement.API.Controllers;
@@ -34,12 +35,34 @@ public class BlogController : ControllerBase
         return StatusCode(response.StatusCode, response);
     }
     
+    [HttpGet("info/username/{username}")]
+    public async Task<ActionResult<BaseResponse<BlogInfoDto>>> GetBlogInfo(string username)
+    {
+        var response = await _mediator.Send(new GetBlogByUsernameQuery { Username = username });
+        return StatusCode(response.StatusCode, response);
+    }
+    
     [HttpDelete("{id}")][Authorize]
     public async Task<ActionResult<BaseResponse<string>>> DeleteBlog(Guid id)
     {
         var response = await _mediator.Send(new DeleteBlogCommand{ Id = id });
         return StatusCode(response.StatusCode,
             response.StatusCode is StatusCodes.Status204NoContent ? null : response);
+    }
+    
+    [HttpPut("info")][Authorize]
+    public async Task<ActionResult<BaseResponse<string>>> UpdateBlogInfo(UpdateBlogInfoCommand command)
+    {
+        var response = await _mediator.Send(command);
+        return StatusCode(response.StatusCode,
+            response.StatusCode is StatusCodes.Status204NoContent ? null : response);
+    }
+    
+    [HttpGet("{id}/posts")]
+    public async Task<ActionResult<BaseResponse<BlogInfoDto>>> GetBlogPosts(Guid id)
+    {
+        var response = await _mediator.Send(new GetBlogPostsQuery {  BlogId = id });
+        return StatusCode(response.StatusCode, response);
     }
     
 }

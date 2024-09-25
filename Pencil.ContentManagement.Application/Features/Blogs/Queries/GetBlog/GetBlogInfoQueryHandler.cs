@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Pencil.ContentManagement.Application.Contracts.Persistence;
 using Pencil.ContentManagement.Application.Responses;
-using Pencil.ContentManagement.Domain.Entities;
 
 namespace Pencil.ContentManagement.Application.Features.Blogs.Queries.GetBlog;
 

@@ -2,7 +2,6 @@ using System.Security.Cryptography;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using Pencil.ContentManagement.API.Middlewares;
 using Pencil.ContentManagement.Application.Responses;
 
 namespace Pencil.ContentManagement.Application.Features.ImageUpload;
@@ -18,34 +17,29 @@ public class UploadImageCommandHandler : IRequestHandler<UploadImageCommand, Bas
 
     public async Task<BaseResponse<List<UploadedImageDto>>> Handle(UploadImageCommand request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<List<UploadedImageDto>>();
+        var validationErrors = new List<string>();
 
         foreach (var file in request.Files)
         {
             if (!_imageUploadSettings.SupportedTypes.Contains(file.ContentType.Split("/")[1]))
             {
-                response.ValidationErrors ??= [];
-                response.ValidationErrors.Add($"{file.FileName}: File Type: {file.ContentType} is not supported");
+                validationErrors.Add($"{file.FileName}: File Type: {file.ContentType} is not supported");
                 continue;
             }
 
             if (file.Length <= 0 || file.Length > _imageUploadSettings.MaxFileSize)
             {
-                response.ValidationErrors ??= [];
-                response.ValidationErrors.Add($"{file.FileName}: File size is out of range.");
+                validationErrors.Add($"{file.FileName}: File size is out of range.");
             }
         }
 
-        if (response.ValidationErrors?.Count > 0)
-        {
-            response.StatusCode = StatusCodes.Status400BadRequest;
-            response.Success = false;
-            return response;
-        }
+        if (validationErrors?.Count > 0)
+            return new (validationErrors);
 
         var images = new List<UploadedImageDto>();
         var currentDirectory = Directory.GetCurrentDirectory();
         var uploadsFolder = Path.Combine(currentDirectory, "Images");
+        
         if (!Directory.Exists(uploadsFolder))
             Directory.CreateDirectory(uploadsFolder);
 
@@ -66,8 +60,7 @@ public class UploadImageCommandHandler : IRequestHandler<UploadImageCommand, Bas
             var image = new UploadedImageDto(uniqueFileName, Path.Combine("Images", uniqueFileName));
             images.Add(image);
         }
-
-        response.Data = images;
-        return response;
+        
+        return new (images);
     }
 }

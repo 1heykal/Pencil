@@ -1,6 +1,8 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pencil.ContentManagement.Application.Features.Auth.Commands.AuthenticateUser;
+using Pencil.ContentManagement.Application.Features.Auth.Commands.ChangePassword;
 using Pencil.ContentManagement.Application.Features.Auth.Commands.RegisterUser;
 using Pencil.ContentManagement.Application.Responses;
 
@@ -29,6 +31,13 @@ namespace Pencil.ContentManagement.API.Controllers
         {
             var response = await _mediator.Send(command);
             return StatusCode(response.StatusCode, response);
+        }
+        
+        [HttpPut("ChangePassword")][Authorize]
+        public async Task<ActionResult<BaseResponse<string>>> ChangePassword(ChangePasswordCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return  StatusCode(response.StatusCode, response.StatusCode is StatusCodes.Status204NoContent? null : response);
         }
     }
 }

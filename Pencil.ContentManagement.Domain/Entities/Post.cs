@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+
 namespace Pencil.ContentManagement.Domain.Entities;
 
 public class Post
@@ -7,13 +9,21 @@ public class Post
     public string? Title { get; set; }
     
     public string? Subtitle { get; set; }
+    
     public string Content { get; set; }
     
     public DateTime PublishedOn { get; set; } = DateTime.UtcNow;
 
     public bool Archived { get; set; }
     public bool SoftDeleted { get; set; }
-    public string Url { get; set; }
+
+    private string _url;
+    public string Url
+    {
+        get => _url;
+        set => _url = !string.IsNullOrEmpty(value)
+            ? value : ((Title?[..Math.Min(Title.Length, 15)] ?? Subtitle?[..Math.Min(Subtitle.Length, 15)] ?? string.Empty) + RandomNumberGenerator.GetHexString(10)).Replace(' ', '-');
+    }
 
     public Guid? BlogId { get; set; }
     public Blog? Blog { get; set; }

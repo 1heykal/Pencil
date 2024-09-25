@@ -26,7 +26,42 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Account\Queries\" />
+      <EmbeddedResource Update="Resources\Shared.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Shared.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Shared.ar.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Shared.ar.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\Shared.en.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Shared.en.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Resources\Shared.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Shared.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Shared.ar.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Shared.ar.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Resources\Shared.en.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Shared.en.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\Boxes\" />
+      <Folder Include="Features\Followings\Queries\" />
+      <Folder Include="Features\Subscriptions\Queries\" />
     </ItemGroup>
 
 </Project>

@@ -43,6 +43,6 @@ public static class AuthHelper
     }
 
     public static bool IsUserAuthorized(IHttpContextAccessor httpContextAccessor, Guid userId)
-        => userId.Equals(httpContextAccessor?.HttpContext?.Items["UserId"] ?? GetUserId(httpContextAccessor).UserId);
+        => userId.Equals(GetUserId(httpContextAccessor).UserId);
 
 }

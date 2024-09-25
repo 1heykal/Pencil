@@ -21,20 +21,11 @@ public class GetPostByUrlQueryHandler : IRequestHandler<GetPostByUrlQuery, BaseR
 
     public async Task<BaseResponse<CreatePostDto>> Handle(GetPostByUrlQuery request, CancellationToken cancellationToken)
     {
-        var response = new BaseResponse<CreatePostDto>();
-
-        var post = await _postRepository.GetAsync(post => post.Url == request.Url, cancellationToken);
+        var post = await _postRepository.GetAsync(post => post.Url.Equals(request.Url), cancellationToken);
 
         if (post is null)
-        {
-            response.Success = false;
-            response.StatusCode = StatusCodes.Status404NotFound;
-            return response;
-        }
-
-        var data = _mapper.Map<CreatePostDto>(post);
-        response.Data = data;
-
-        return response;
+            return new ([$"Can't find post with the specified url: {request.Url}"], StatusCodes.Status404NotFound);
+        
+        return new(_mapper.Map<CreatePostDto>(post));
     }
 }

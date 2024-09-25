@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Pencil.ContentManagement.API.Filters;
 using Pencil.ContentManagement.Application.Features.Posts.Commands.CreatePost;
 using Pencil.ContentManagement.Application.Features.Posts.Commands.UpdatePost;
+using Pencil.ContentManagement.Application.Features.Posts.Queries.GetFeedPosts;
 using Pencil.ContentManagement.Application.Features.Posts.Queries.GetPost;
 using Pencil.ContentManagement.Application.Features.Posts.Queries.GetPosts;
 using Pencil.ContentManagement.Application.Responses;
@@ -25,6 +25,13 @@ namespace Pencil.ContentManagement.API.Controllers
         public async Task<ActionResult<BaseResponse<List<PostsDto>>>> GetAllPosts()
         {
             var response = await _mediator.Send(new GetPostsQuery());
+            return StatusCode(response.StatusCode, response);
+        }
+        
+        [HttpGet("Feed")][Authorize]
+        public async Task<ActionResult<BaseResponse<List<PostsDto>>>> GetFeedPosts()
+        {
+            var response = await _mediator.Send(new GetFeedPostsQuery());
             return StatusCode(response.StatusCode, response);
         }
 

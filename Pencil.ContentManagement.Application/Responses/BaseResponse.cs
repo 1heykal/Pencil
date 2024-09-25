@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Http;
+using Pencil.ContentManagement.Application.Resources;
 
 namespace Pencil.ContentManagement.Application.Responses;
 
 public class BaseResponse<T>
 {
-    public bool Success { get; set; }
+    public bool Success { get; set; } = true;
 
     public string Message { get; set; } = string.Empty;
 
@@ -16,18 +17,17 @@ public class BaseResponse<T>
 
     public BaseResponse()
     {
-        Success = true;
+        Message = Shared.Success;
     }
 
     public BaseResponse(T data)
     {
-        Success = true;
         Data = data;
+        Message = Shared.Success;
     }
 
     public BaseResponse(string message)
     {
-        Success = true;
         Message = message;
     }
     
@@ -35,6 +35,7 @@ public class BaseResponse<T>
     {
         Message = message;
         StatusCode = statusCode;
+        Success = statusCode < 400;
     }
 
     public BaseResponse(bool success, string message, int statusCode = StatusCodes.Status400BadRequest)
@@ -54,6 +55,7 @@ public class BaseResponse<T>
     public BaseResponse(List<string> validationErrors)
     {
         Success = false;
+        Message = Shared.Failure;
         StatusCode = StatusCodes.Status400BadRequest;
         ValidationErrors = validationErrors;
     }
@@ -61,6 +63,7 @@ public class BaseResponse<T>
     public BaseResponse(List<string> validationErrors, int statusCode)
     {
         Success = false;
+        Message = Shared.Failure;
         ValidationErrors = validationErrors;
         StatusCode = statusCode;
     }

@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pencil.ContentManagement.Application.Features.Account.Commands.UpdateProfile;
+using Pencil.ContentManagement.Application.Features.Account.Queries.GetProfile;
 
 namespace Pencil.ContentManagement.API.Controllers;
 
@@ -21,5 +22,12 @@ public class AccountController : ControllerBase
     {
         var response = await _mediator.Send(command);
         return StatusCode(response.StatusCode, response.StatusCode is StatusCodes.Status204NoContent? null : response);
+    }
+    
+    [HttpGet("{username}")]
+    public async Task<ActionResult> GetProfileDetails(string username)
+    {
+        var response = await _mediator.Send(new GetProfileDetailsQuery{ Username = username });
+        return StatusCode(response.StatusCode, response);
     }
 }

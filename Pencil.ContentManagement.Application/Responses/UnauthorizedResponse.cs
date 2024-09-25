@@ -3,20 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Pencil.ContentManagement.Application.Responses;
 
-public class UnauthorizedResponse<T> : BaseResponse<T>, IActionResult
+public class UnauthorizedResponse<T> : BaseResponse<T>
 {
-    public UnauthorizedResponse() : base(["You are not Authorized to do this action."], StatusCodes.Status401Unauthorized)
+    public UnauthorizedResponse() : base(["You are not Authorized to perform this action."], StatusCodes.Status401Unauthorized)
     {
         
-    }
-
-    public async Task ExecuteResultAsync(ActionContext context)
-    {
-        var objectResult = new ObjectResult(this)
-        {
-            StatusCode = StatusCode
-        };
-
-        await objectResult.ExecuteResultAsync(context);
     }
 }

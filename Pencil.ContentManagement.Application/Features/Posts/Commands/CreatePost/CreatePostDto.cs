@@ -1,5 +1,3 @@
-using Pencil.ContentManagement.Domain.Entities;
-
 namespace Pencil.ContentManagement.Application.Features.Posts.Commands.CreatePost;
 
 public class CreatePostDto

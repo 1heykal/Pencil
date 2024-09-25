@@ -12,6 +12,8 @@ public class Comment
     public Guid AuthorId { get; set; }
     public ApplicationUser Author { get; set; }
     
+    public DateTime PublishedOn { get; set; } = DateTime.UtcNow;
+    
     public bool SoftDeleted { get; set; }
 
     public IReadOnlyCollection<Like<Comment>> Likes { get; }

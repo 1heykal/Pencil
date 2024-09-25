@@ -37,7 +37,7 @@ public class ExceptionHandlerMiddleware
         (httpStatusCode, result) = exception switch
         {
             ValidationException ex => (HttpStatusCode.BadRequest, Serialize(ex.ValidationErrors)),
-            _ => (httpStatusCode, Serialize(new { error = exception.Message }))
+            _ => (httpStatusCode, Serialize(new { error = "An error occurred while processing your request." }))
         };
 
         context.Response.StatusCode = (int) httpStatusCode;
