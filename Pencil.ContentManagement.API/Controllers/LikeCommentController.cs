@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pencil.ContentManagement.Application.Features.Likes;
+using Pencil.ContentManagement.Application.Features.Likes.Commands;
 using Pencil.ContentManagement.Application.Responses;
 
 namespace Pencil.ContentManagement.API.Controllers;
@@ -19,9 +20,9 @@ public class LikeCommentController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<BaseResponse<string>>> LikeAsync(Guid commentId)
+    public async Task<ActionResult<BaseResponse<string>>> LikeAsync(LikeCommentCommand command)
     {
-        var response = await _mediator.Send(new LikeCommentCommand { CommentId = commentId });
+        var response = await _mediator.Send(command);
         return StatusCode(response.StatusCode, response);
     }
 }

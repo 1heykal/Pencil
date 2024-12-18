@@ -4,7 +4,7 @@ using Pencil.ContentManagement.Application.Responses;
 
 namespace Pencil.ContentManagement.Application.Features.Blogs.Queries.GetBlogPosts;
 
-public class GetBlogPostsQuery : IRequest<BaseResponse<IReadOnlyList<BlogPostsDto>>>
+public class GetBlogPostsQuery : IRequest<BaseResponse<IReadOnlyList<PostsDto>>>
 {
     public Guid BlogId { get; set; }
 }

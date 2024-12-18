@@ -10,6 +10,10 @@ public class CreatePostCommand : IRequest<BaseResponse<CreatePostDto>>
     public string? Subtitle { get; set; }
     
     public string Content { get; set; }
+
+    public string? Type { get; set; }
+    
+    public List<string> Tags { get; set; }
     
     public Guid? BlogId { get; set; }
     

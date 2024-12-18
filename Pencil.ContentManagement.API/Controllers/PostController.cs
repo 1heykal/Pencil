@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pencil.ContentManagement.Application.Features.Posts.Commands.CreatePost;
+using Pencil.ContentManagement.Application.Features.Posts.Commands.DeletePost;
 using Pencil.ContentManagement.Application.Features.Posts.Commands.UpdatePost;
 using Pencil.ContentManagement.Application.Features.Posts.Queries.GetFeedPosts;
 using Pencil.ContentManagement.Application.Features.Posts.Queries.GetPost;
@@ -31,7 +33,14 @@ namespace Pencil.ContentManagement.API.Controllers
         [HttpGet("Feed")][Authorize]
         public async Task<ActionResult<BaseResponse<List<PostsDto>>>> GetFeedPosts()
         {
+            var timer = new Stopwatch();
+            timer.Start();
+            
             var response = await _mediator.Send(new GetFeedPostsQuery());
+            
+            timer.Stop();
+            var time = timer.ElapsedMilliseconds;
+            
             return StatusCode(response.StatusCode, response);
         }
 
@@ -43,23 +52,37 @@ namespace Pencil.ContentManagement.API.Controllers
         }
 
         [HttpGet("{url}", Name ="GetPostByUrl")]
-        public async Task<ActionResult<BaseResponse<CreatePostDto>>> GetPostByUrl(string url)
+        public async Task<ActionResult<BaseResponse<PostsDto>>> GetPostByUrl(string url)
         {
             var response = await _mediator.Send(new GetPostByUrlQuery { Url = url });
             return StatusCode(response.StatusCode, response);
         }
         
         [HttpGet("pid/{id}", Name ="GetPostById")]
-        public async Task<ActionResult<BaseResponse<CreatePostDto>>> GetPostById(Guid id)
+        public async Task<ActionResult<BaseResponse<PostsDto>>> GetPostById(Guid id)
         {
             var response = await _mediator.Send(new GetPostByIdQuery { Id = id });
             return StatusCode(response.StatusCode, response);
         }
         
+        [HttpGet("username/{username}", Name ="GetPostsByUsername")]
+        public async Task<ActionResult<BaseResponse<List<PostsDto>>>> GetPostsByUsername(string username)
+        {
+            var response = await _mediator.Send(new GetPostsByUsernameQuery { Username = username });
+            return StatusCode(response.StatusCode, response);
+        }
+        
         [HttpGet("u/{uid}", Name ="GetPostsByUserId")]
-        public async Task<ActionResult<BaseResponse<CreatePostDto>>> GetPostsByUserId(Guid uid)
+        public async Task<ActionResult<BaseResponse<List<PostsDto>>?>> GetPostsByUserId(Guid uid)
         {
             var response = await _mediator.Send(new GetPostsByUserIdQuery { UserId = uid });
+            return StatusCode(response.StatusCode, response);
+        }
+        
+        [HttpGet("t/{name}", Name ="GetPostsByTag")]
+        public async Task<ActionResult<IReadOnlyList<PostsDto>>> GetPostsByUserId(string name)
+        {
+            var response = await _mediator.Send(new GetPostsByTagQuery { Name = name });
             return StatusCode(response.StatusCode, response);
         }
 

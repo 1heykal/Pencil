@@ -14,8 +14,20 @@ public interface IPostRepository : IAsyncRepository<Post>
 
     Task<IReadOnlyList<PostsDto>> GetPostsDtoAsync(CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyList<PostsDto>> GetPostsDtoAsync(Expression<Func<Post, bool>> wherePredicate,
+    Task<PostsDto?> GetPostsDtoAsync(Expression<Func<Post, bool>> wherePredicate,
         CancellationToken cancellationToken = default);
+    
+    Task<IReadOnlyList<PostsDto>> GetAllPostsDtoAsync(Expression<Func<Post, bool>> wherePredicate,
+        CancellationToken cancellationToken = default);
+    
+    
 
     Task<List<PostsDto>> GetFeedPostsByUserId(Guid id,  CancellationToken cancellationToken = default);
+    
+    Task<List<PostsDto>> GetLikedPostsByUserId(Guid id,  CancellationToken cancellationToken = default);
+
+    Task<List<PostsDto>> GetPostsByUserId(Guid id, Expression<Func<Post, bool>> wherePredicate,
+        CancellationToken cancellationToken = default);
+
+
 }

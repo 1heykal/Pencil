@@ -13,14 +13,17 @@ public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, BaseR
     private readonly IMapper _mapper;
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IAsyncRepository<Post> _postRepository;
+    private readonly IAsyncRepository<Tag> _tagRepository;
+
     private readonly IBlogRepository _blogRepository;
     private readonly IUserRepository _userRepository;
 
-    public CreatePostCommandHandler(IMapper mapper, IHttpContextAccessor httpContextAccessor, IAsyncRepository<Post> postRepository, IBlogRepository blogRepository, IUserRepository userRepository)
+    public CreatePostCommandHandler(IMapper mapper, IHttpContextAccessor httpContextAccessor, IAsyncRepository<Post> postRepository, IBlogRepository blogRepository, IUserRepository userRepository, IAsyncRepository<Tag> tagRepository)
     {
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         _postRepository = postRepository ?? throw new ArgumentNullException(nameof(postRepository));
+        _tagRepository = tagRepository ?? throw new ArgumentNullException(nameof(tagRepository));
         _blogRepository = blogRepository ?? throw new ArgumentNullException(nameof(blogRepository));
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
     }
@@ -33,8 +36,17 @@ public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, BaseR
             if (!blogExists)
                 return new BaseResponse<CreatePostDto>([$"Incorrect Blog Id: {request.BlogId}"]);
         }
-        
+
+        var tags = new List<Tag>();
+        foreach (var tag in request.Tags)
+        {
+            var existed = await _tagRepository.GetAsync(t => t.Name.Equals(tag), cancellationToken);
+             tags.Add(existed ?? new Tag{Name = tag});
+        }
+
         var entity = _mapper.Map<Post>(request);
+        entity.Url = string.Empty;
+        entity.Tags = tags;
         
         var userId = AuthHelper.GetUserId(_httpContextAccessor).UserId;
         if (!await _userRepository.ExistsAsync(userId))

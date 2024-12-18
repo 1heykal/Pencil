@@ -1,13 +1,18 @@
 namespace Pencil.ContentManagement.Application.Features.Account.Queries.GetProfile;
 
-public record ProfileDetailsDto(
-    Guid Id,
-    string FirstName,
-    string? LastName,
-    string Username,
-    string? Bio,
-    string? PhotoPath,
-    DateOnly? BirthDate,
-    string? Gender,
-    int FollowingCount,
-    int FollowersCount);
+public class ProfileDetailsDto
+{
+    public Guid Id { get; set; }
+    public string FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string Username { get; set; }
+    public string? Bio { get; set; }
+    public string? PhotoPath { get; set; }
+    public DateOnly? BirthDate { get; set; }
+    public string? Gender { get; set; }
+    public int FollowingCount { get; set; }
+    public int FollowersCount { get; set; }
+    public int PostsCount { get; set; }
+    public bool SameUser { get; set; }
+    public bool Followed { get; set; }
+}

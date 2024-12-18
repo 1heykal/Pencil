@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Pencil.ContentManagement.Application.Features.Blogs.Queries.GetBlog;
+using Pencil.ContentManagement.Application.Features.Blogs.Queries.GetBlogPosts;
 using Pencil.ContentManagement.Application.Features.Posts.Queries.GetPosts;
 using Pencil.ContentManagement.Domain.Entities;
 
@@ -15,6 +16,8 @@ public interface IBlogRepository : IAsyncRepository<Blog>
     
     Task SoftDelete(Blog entity, CancellationToken cancellationToken = default);
     
-    Task<IReadOnlyList<BlogPostsDto>> GetPostsDtoAsync(Expression<Func<Post, bool>> wherePredicate, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<PostsDto>> GetPostsDtoAsync(Expression<Func<Post, bool>> wherePredicate, CancellationToken cancellationToken = default);
+    
+    Task<List<BlogInfoDto>> GetBlogsByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
     
 }

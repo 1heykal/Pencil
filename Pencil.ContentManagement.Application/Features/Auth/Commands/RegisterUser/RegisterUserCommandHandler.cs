@@ -31,6 +31,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, B
         var entity = _mapper.Map<ApplicationUser>(request);
         
         entity.PasswordHash = request.Password;
+        entity.Username = string.Empty;
         
         user = await _userRepository.AddAsync(entity, cancellationToken);
 

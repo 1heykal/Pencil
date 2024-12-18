@@ -22,12 +22,8 @@ public class GetBlogInfoQueryHandler : IRequestHandler<GetBlogInfoQuery, BaseRes
 
         if (blog is null)
         {
-            return new BaseResponse<BlogInfoDto>
-            {
-                Success = false,
-                StatusCode = StatusCodes.Status404NotFound,
-                ValidationErrors = [$"There is no blog with the id: {request.Id}"]
-            };
+            return new BaseResponse<BlogInfoDto>([$"There is no blog with the id: {request.Id}"],
+                StatusCodes.Status404NotFound);
         }
         
         return new BaseResponse<BlogInfoDto>(blog);

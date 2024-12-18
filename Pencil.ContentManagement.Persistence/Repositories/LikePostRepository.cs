@@ -12,6 +12,9 @@ public class LikePostRepository : BaseRepository<Like<Post>>, ILikePostRepositor
     public async Task<Like<Post>> AddAsync(Guid postId, Guid userId, CancellationToken cancellationToken = default)
     {
         var entity = new Like<Post> { ItemId = postId, UserId = userId };
-        return await base.AddAsync(entity, cancellationToken);
+        await _dbContext.Set<Like<Post>>().AddAsync(entity, cancellationToken);
+        await _dbContext.SaveChangesAsync(cancellationToken);
+
+        return entity;
     }
 }

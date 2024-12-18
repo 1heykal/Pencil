@@ -51,6 +51,9 @@ public class ApplicationUser
     public IReadOnlyCollection<Post> Posts { get; }
     public IReadOnlyCollection<Blog> Blogs { get; }
     
+    public IReadOnlyCollection<Box> Boxes { get; set; }
+
+    public IReadOnlyCollection<Like<Post>> LikedPosts { get; set; }
     public bool ValidatePassword(string password)
     {
         return BCrypt.Verify(password, PasswordHash);

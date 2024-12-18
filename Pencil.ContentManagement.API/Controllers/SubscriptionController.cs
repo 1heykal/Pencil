@@ -25,10 +25,10 @@ public class SubscriptionController : ControllerBase
         return StatusCode(response.StatusCode, response);
     }
     
-    [HttpDelete("Unsubscribe")]
-    public async Task<ActionResult<BaseResponse<string>>> Unsubscribe(UnsubscribeCommand command)
+    [HttpDelete("Unsubscribe/{id}")]
+    public async Task<ActionResult<BaseResponse<string>>> Unsubscribe(Guid id)
     {
-        var response = await _mediator.Send(command);
+        var response = await _mediator.Send(new UnsubscribeCommand { BlogId = id });
         return StatusCode(response.StatusCode,
             response.StatusCode is StatusCodes.Status204NoContent ? null : response);
     }

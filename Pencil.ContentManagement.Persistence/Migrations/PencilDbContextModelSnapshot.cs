@@ -22,6 +22,21 @@ namespace Pencil.ContentManagement.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("BoxPost", b =>
+                {
+                    b.Property<Guid>("BoxId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PostsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BoxId", "PostsId");
+
+                    b.HasIndex("PostsId");
+
+                    b.ToTable("BoxPost");
+                });
+
             modelBuilder.Entity("Pencil.ContentManagement.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -114,6 +129,29 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Blog");
+                });
+
+            modelBuilder.Entity("Pencil.ContentManagement.Domain.Entities.Box", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Public")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.ToTable("Box");
                 });
 
             modelBuilder.Entity("Pencil.ContentManagement.Domain.Entities.Comment", b =>
@@ -234,6 +272,9 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
@@ -398,6 +439,21 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                     b.ToTable("PostTag");
                 });
 
+            modelBuilder.Entity("BoxPost", b =>
+                {
+                    b.HasOne("Pencil.ContentManagement.Domain.Entities.Box", null)
+                        .WithMany()
+                        .HasForeignKey("BoxId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Pencil.ContentManagement.Domain.Entities.Post", null)
+                        .WithMany()
+                        .HasForeignKey("PostsId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Pencil.ContentManagement.Domain.Entities.Blog", b =>
                 {
                     b.HasOne("Pencil.ContentManagement.Domain.Entities.ApplicationUser", "Author")
@@ -407,6 +463,17 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("Pencil.ContentManagement.Domain.Entities.Box", b =>
+                {
+                    b.HasOne("Pencil.ContentManagement.Domain.Entities.ApplicationUser", "Creator")
+                        .WithMany("Boxes")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("Pencil.ContentManagement.Domain.Entities.Comment", b =>
@@ -475,7 +542,7 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Pencil.ContentManagement.Domain.Entities.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("LikedPosts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -579,9 +646,13 @@ namespace Pencil.ContentManagement.Persistence.Migrations
                 {
                     b.Navigation("Blogs");
 
+                    b.Navigation("Boxes");
+
                     b.Navigation("Followers");
 
                     b.Navigation("Following");
+
+                    b.Navigation("LikedPosts");
 
                     b.Navigation("Posts");
 

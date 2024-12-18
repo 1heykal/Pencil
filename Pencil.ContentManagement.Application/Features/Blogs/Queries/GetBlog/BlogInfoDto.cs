@@ -16,4 +16,6 @@ public class BlogInfoDto
 
     public string AuthorName { get; set; }
     public string? AuthorPhotoPath { get; set; }
+
+    public bool IsCurrentUserSubscribed { get; set; }
 }

@@ -25,10 +25,10 @@ public class FollowingController : ControllerBase
         return StatusCode(response.StatusCode, response);
     }
     
-    [HttpDelete("Unfollow")]
-    public async Task<ActionResult<BaseResponse<string>>> UnfollowUser(UnfollowUserCommand command)
+    [HttpDelete("Unfollow/{id}")]
+    public async Task<ActionResult<BaseResponse<string>>> UnfollowUser(Guid id)
     {
-        var response = await _mediator.Send(command);
+        var response = await _mediator.Send(new UnfollowUserCommand{FollowedId = id});
         return StatusCode(response.StatusCode,
             response.StatusCode is StatusCodes.Status204NoContent ? null : response);
     }

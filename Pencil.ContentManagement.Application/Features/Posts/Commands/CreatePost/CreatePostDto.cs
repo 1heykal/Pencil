@@ -7,7 +7,13 @@ public class CreatePostDto
     public string? Title { get; set; }
     
     public string? Subtitle { get; set; }
+
+    public string? Type { get; set; }
+
     public string Content { get; set; }
+    
+    public bool Liked { get; set; }
+    public bool Saved { get; set; }
     
     public DateTime PublishedOn { get; set; } = DateTime.UtcNow;
 
@@ -18,4 +24,6 @@ public class CreatePostDto
     public Guid? BlogId { get; set; }
     
     public Guid AuthorId { get; set; }
+    
+    public List<string> Tags { get; set; }
 }

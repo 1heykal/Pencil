@@ -12,5 +12,11 @@ public class CreateCommentDto
     
     public Guid AuthorId { get; set; }
     public Guid PostId { get; set; }
+    
+    public string AuthorName { get; set; } = string.Empty;
+    public string AuthorUserName { get; set; } = string.Empty;
+    public string AuthorPhotoPath { get; set; } = string.Empty;
+    
+    
 
 }

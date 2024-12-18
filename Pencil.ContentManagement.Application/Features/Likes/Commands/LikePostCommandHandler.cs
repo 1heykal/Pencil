@@ -4,7 +4,7 @@ using Pencil.ContentManagement.Application.Contracts.Persistence;
 using Pencil.ContentManagement.Application.Features.Auth;
 using Pencil.ContentManagement.Application.Responses;
 
-namespace Pencil.ContentManagement.Application.Features.Likes;
+namespace Pencil.ContentManagement.Application.Features.Likes.Commands;
 
 public class LikePostCommandHandler : IRequestHandler<LikePostCommand, BaseResponse<string>>
 {

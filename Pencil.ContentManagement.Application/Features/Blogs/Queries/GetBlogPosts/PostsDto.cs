@@ -1,4 +1,4 @@
-namespace Pencil.ContentManagement.Application.Features.Posts.Queries.GetPosts;
+namespace Pencil.ContentManagement.Application.Features.Blogs.Queries.GetBlogPosts;
 
 public class BlogPostsDto
 {
@@ -9,6 +9,7 @@ public class BlogPostsDto
 
     public DateTime PublishedOn { get; set; }
     
+    public string AuthorUsername { get; set; } = string.Empty;
     public string AuthorName { get; set; } = string.Empty;
     public string AuthorPhotoPath { get; set; } = string.Empty;
 }

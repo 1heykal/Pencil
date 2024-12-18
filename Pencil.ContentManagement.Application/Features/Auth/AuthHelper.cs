@@ -26,7 +26,7 @@ public static class AuthHelper
             configuration["Authentication:Audience"],
             claimsForToken,
             DateTime.UtcNow,
-            DateTime.UtcNow.AddHours(1),
+            DateTime.UtcNow.AddDays(7),
             signingCredentials
         );
 

@@ -4,7 +4,7 @@ using Pencil.ContentManagement.Application.Contracts.Persistence;
 using Pencil.ContentManagement.Application.Features.Auth;
 using Pencil.ContentManagement.Application.Responses;
 
-namespace Pencil.ContentManagement.Application.Features.Posts.Commands.UpdatePost;
+namespace Pencil.ContentManagement.Application.Features.Posts.Commands.DeletePost;
 
 public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, BaseResponse<string>>
 {

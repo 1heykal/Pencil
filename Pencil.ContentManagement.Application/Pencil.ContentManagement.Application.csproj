@@ -59,7 +59,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\Boxes\" />
       <Folder Include="Features\Followings\Queries\" />
       <Folder Include="Features\Subscriptions\Queries\" />
     </ItemGroup>
